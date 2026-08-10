@@ -1,0 +1,226 @@
+@import "tailwindcss";
+
+@theme {
+  --color-moss: #2c3b1f;
+  --color-moss-dark: #1b2513;
+  --color-moss-deep: #131a0d;
+  --color-stone: #e7e2d4;
+  --color-stone-light: #f2efe6;
+  --color-stone-dark: #d7d0bd;
+  --color-clay: #9c5a34;
+  --color-clay-dark: #7f4728;
+  --color-sage: #8fa968;
+  --color-sage-light: #adc48a;
+
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  html {
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-stone);
+    color: var(--color-moss-dark);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible, high-contrast keyboard focus everywhere. */
+  :focus-visible {
+    outline: 3px solid var(--color-clay);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-sage);
+    color: var(--color-moss-deep);
+  }
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-x {
+      padding-inline: 2rem;
+    }
+  }
+
+  .eyebrow {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* Skip link — visually hidden until focused. */
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -100%;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    background: var(--color-moss-dark);
+    color: var(--color-stone-light);
+    font-weight: 700;
+    border-radius: 0.5rem;
+    transition: top 0.2s var(--ease-out-soft);
+  }
+
+  .skip-link:focus {
+    top: 1rem;
+  }
+}
+
+/* ---------------------------------------------------------------- *
+ * Scroll reveal
+ * Elements start hidden and animate in when [data-revealed] is set
+ * by the IntersectionObserver in <Reveal>. --reveal-delay staggers
+ * grouped children (gallery tiles, review cards).
+ * ---------------------------------------------------------------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-shift, 1.75rem), 0);
+  transition:
+    opacity 0.7s var(--ease-out-soft),
+    transform 0.7s var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal][data-revealed] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Hero entrance — runs on load rather than on scroll. */
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.5rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hero-media-in {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero-in {
+  opacity: 0;
+  animation: hero-in 0.85s var(--ease-out-soft) forwards;
+  animation-delay: var(--hero-delay, 0ms);
+}
+
+.hero-media-in {
+  opacity: 0;
+  animation: hero-media-in 1.4s var(--ease-out-soft) forwards;
+}
+
+/* Cards and photos: gentle lift on hover, and on keyboard focus. */
+.lift {
+  transition:
+    transform 0.35s var(--ease-out-soft),
+    box-shadow 0.35s var(--ease-out-soft);
+}
+
+@media (hover: hover) {
+  .lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px -18px rgba(19, 26, 13, 0.45);
+  }
+}
+
+.lift:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px -18px rgba(19, 26, 13, 0.45);
+}
+
+/* Photo tiles scale their image inside a fixed frame. */
+.zoom-frame img {
+  transition: transform 0.6s var(--ease-out-soft);
+}
+
+@media (hover: hover) {
+  .zoom-frame:hover img {
+    transform: scale(1.055);
+  }
+}
+
+.zoom-frame:focus-within img {
+  transform: scale(1.055);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal],
+  [data-reveal][data-revealed] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-in,
+  .hero-media-in {
+    opacity: 1;
+    animation: none;
+  }
+
+  .lift,
+  .lift:hover,
+  .lift:focus-within,
+  .zoom-frame img,
+  .zoom-frame:hover img,
+  .zoom-frame:focus-within img {
+    transform: none;
+    transition: none;
+  }
+}
