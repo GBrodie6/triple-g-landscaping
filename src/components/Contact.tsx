@@ -8,10 +8,13 @@ import { ClockIcon, MailIcon, MessageIcon, PhoneIcon, PinIcon } from "./Icons";
 
 const serviceOptions = [
   "Weekly mowing",
+  "Edging & trimming",
   "Mulching & bed maintenance",
   "Spring or fall cleanup",
-  "Snow or leaf removal",
-  "Edging & trimming",
+  "Tree & shrub care",
+  "Aeration & lawn renovation",
+  "General landscaping",
+  "Snow & ice removal",
   "Something else",
 ];
 

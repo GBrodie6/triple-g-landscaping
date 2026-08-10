@@ -48,7 +48,7 @@ export function CleanupIcon({ className }: IconProps) {
   );
 }
 
-export function SnowLeafIcon({ className }: IconProps) {
+export function SnowIcon({ className }: IconProps) {
   return (
     <svg {...base} className={className}>
       <path d="M12 2.6v18.8" />
@@ -58,6 +58,42 @@ export function SnowLeafIcon({ className }: IconProps) {
       <path d="M12 17.6l2.1 2.1M12 17.6l-2.1 2.1" />
       <path d="M7.6 9.6L4.7 9.2M7.6 14.4l-2.9.4" />
       <path d="M16.4 9.6l2.9-.4M16.4 14.4l2.9.4" />
+    </svg>
+  );
+}
+
+/* Canopy is three overlapping circles so it reads as foliage rather than a
+   lollipop at large sizes. */
+export function TreeIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <circle cx="8.7" cy="9.6" r="3.5" />
+      <circle cx="15.3" cy="9.6" r="3.5" />
+      <circle cx="12" cy="6.5" r="3.5" />
+      <path d="M12 20.9v-7.6" />
+    </svg>
+  );
+}
+
+/* Soil cores lifted above the ground line, holes left below it. */
+export function AerationIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M3.4 14.8h17.2" />
+      <path d="M7 14.8v4.6M12 14.8v4.6M17 14.8v4.6" />
+      <rect x="5.9" y="6.6" width="2.2" height="5" rx="1.1" />
+      <rect x="10.9" y="5.4" width="2.2" height="6.2" rx="1.1" />
+      <rect x="15.9" y="6.6" width="2.2" height="5" rx="1.1" />
+    </svg>
+  );
+}
+
+export function ShovelIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M12 4.2v8.4" />
+      <path d="M9.8 4.2h4.4" />
+      <path d="M8.4 12.6h7.2v2.5a3.6 3.6 0 01-7.2 0z" />
     </svg>
   );
 }

@@ -2,11 +2,14 @@ import Image from "next/image";
 import type { ComponentType } from "react";
 import Reveal from "./Reveal";
 import {
+  AerationIcon,
   CleanupIcon,
   MowerIcon,
   MulchIcon,
   ShearsIcon,
-  SnowLeafIcon,
+  ShovelIcon,
+  SnowIcon,
+  TreeIcon,
 } from "./Icons";
 
 type Service = {
@@ -18,6 +21,10 @@ type Service = {
   focus?: string;
 };
 
+/**
+ * Ordered so the four cards backed by real job photos fill the first row on
+ * large screens and the four icon panels fill the second.
+ */
 const services: Service[] = [
   {
     title: "Weekly Mowing",
@@ -28,6 +35,16 @@ const services: Service[] = [
       alt: "Wide roadside lawn in Madison, CT with fresh mower lines fanning out toward the street",
     },
     focus: "50% 42%",
+  },
+  {
+    title: "Edging & Trimming",
+    body: "Crisp bed lines, trimmed borders along walks and fences, and clean separation between lawn and landscape.",
+    Icon: ShearsIcon,
+    image: {
+      src: "/images/flowerbed-7.jpg",
+      alt: "Crisp mulch bed with rounded shrubs edged tight against a green lawn at a Connecticut home",
+    },
+    focus: "50% 45%",
   },
   {
     title: "Mulching & Bed Maintenance",
@@ -41,7 +58,7 @@ const services: Service[] = [
   },
   {
     title: "Spring & Fall Cleanups",
-    body: "Beds cut back, debris hauled off, and the yard reset so the season starts and ends the right way.",
+    body: "Beds cut back, leaves cleared, debris hauled off, and the yard reset so the season starts and ends the right way.",
     Icon: CleanupIcon,
     image: {
       src: "/images/flowerbed-6.jpg",
@@ -50,19 +67,24 @@ const services: Service[] = [
     focus: "50% 45%",
   },
   {
-    title: "Snow & Leaf Removal",
-    body: "Driveways and walkways cleared after the storm, and leaves off the lawn before they smother the grass.",
-    Icon: SnowLeafIcon,
+    title: "Tree & Shrub Care",
+    body: "Pruning and trimming that keeps trees and shrubs healthy and shaped right, done at the times of year that actually help growth.",
+    Icon: TreeIcon,
   },
   {
-    title: "Edging & Trimming",
-    body: "Crisp bed lines, trimmed borders along walks and fences, and clean separation between lawn and landscape.",
-    Icon: ShearsIcon,
-    image: {
-      src: "/images/flowerbed-7.jpg",
-      alt: "Crisp mulch bed with rounded shrubs edged tight against a green lawn at a Connecticut home",
-    },
-    focus: "50% 45%",
+    title: "Aeration & Lawn Renovation",
+    body: "Aeration, dethatching, and overseeding to fix compacted or thin lawns and get real grass growing back.",
+    Icon: AerationIcon,
+  },
+  {
+    title: "General Landscaping",
+    body: "Design and installation for new landscaping features, plus ongoing upkeep for larger properties.",
+    Icon: ShovelIcon,
+  },
+  {
+    title: "Snow & Ice Removal",
+    body: "Driveways and walkways plowed after each storm, and salt down on the ice so the property stays walkable all winter.",
+    Icon: SnowIcon,
   },
 ];
 
@@ -76,7 +98,7 @@ export default function Services() {
         <Reveal className="max-w-2xl">
           <p className="eyebrow text-clay">What we do</p>
           <h2 className="mt-3 text-[clamp(2rem,5.4vw,3.25rem)] text-moss-dark">
-            Five services, done properly.
+            Eight services, done properly.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-moss/80">
             No packages you don&apos;t need and no upsells. Tell us what the property
@@ -84,73 +106,53 @@ export default function Services() {
           </p>
         </Reveal>
 
-        {/* Six-column grid: three tall cards on top, two wide cards beneath
-            that lay out side-by-side so the rows stay balanced. */}
-        <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
-          {services.map((service, i) => {
-            const wide = i >= 3;
-
-            return (
-              <Reveal
-                key={service.title}
-                as="li"
-                delay={i * 90}
-                className={`lift group overflow-hidden rounded-2xl bg-stone-light shadow-[0_1px_0_0_rgba(44,59,31,0.1)] ${
-                  wide
-                    ? "flex flex-col sm:flex-row lg:col-span-3"
-                    : "flex flex-col lg:col-span-2"
-                }`}
-              >
-                {service.image ? (
-                  <div
-                    className={`zoom-frame relative overflow-hidden ${
-                      wide
-                        ? "aspect-[4/3] sm:aspect-auto sm:w-[42%] sm:shrink-0 sm:self-stretch"
-                        : "aspect-[4/3]"
-                    }`}
-                  >
-                    <Image
-                      src={service.image.src}
-                      alt={service.image.alt}
-                      fill
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      className="object-cover"
-                      style={{ objectPosition: service.focus ?? "center" }}
-                    />
-                  </div>
-                ) : (
-                  <div
-                    className={`relative grid place-items-center overflow-hidden bg-moss ${
-                      wide
-                        ? "aspect-[4/3] sm:aspect-auto sm:w-[42%] sm:shrink-0 sm:self-stretch"
-                        : "aspect-[4/3]"
-                    }`}
-                  >
-                    <div
-                      className="absolute inset-0 opacity-25"
-                      aria-hidden="true"
-                      style={{ backgroundImage: hatch }}
-                    />
-                    <service.Icon className="relative size-20 text-sage-light" />
-                  </div>
-                )}
-
-                <div className="flex flex-1 flex-col p-6 sm:p-7">
-                  {/* Fixed height keeps one- and two-line titles from
-                      knocking the body copy out of alignment across cards. */}
-                  <div className="flex items-center gap-3 sm:min-h-[3.6rem]">
-                    <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-moss/8 text-moss">
-                      <service.Icon className="size-5" />
-                    </span>
-                    <h3 className="text-xl text-moss-dark sm:text-[1.35rem]">
-                      {service.title}
-                    </h3>
-                  </div>
-                  <p className="mt-3.5 leading-relaxed text-moss/75">{service.body}</p>
+        <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {services.map((service, i) => (
+            <Reveal
+              key={service.title}
+              as="li"
+              delay={(i % 4) * 90}
+              className="lift group flex flex-col overflow-hidden rounded-2xl bg-stone-light shadow-[0_1px_0_0_rgba(44,59,31,0.1)]"
+            >
+              {service.image ? (
+                <div className="zoom-frame relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={service.image.src}
+                    alt={service.image.alt}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover"
+                    style={{ objectPosition: service.focus ?? "center" }}
+                  />
                 </div>
-              </Reveal>
-            );
-          })}
+              ) : (
+                <div className="relative grid aspect-[4/3] place-items-center overflow-hidden bg-moss">
+                  <div
+                    className="absolute inset-0 opacity-25"
+                    aria-hidden="true"
+                    style={{ backgroundImage: hatch }}
+                  />
+                  <service.Icon className="relative size-16 text-sage-light" />
+                </div>
+              )}
+
+              <div className="flex flex-1 flex-col p-5 sm:p-6">
+                <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-moss/8 text-moss">
+                  <service.Icon className="size-5" />
+                </span>
+                {/* Fixed height keeps one- and two-line titles from knocking
+                    the body copy out of alignment across the row. Sized to two
+                    lines of text-xl, whose 1.75rem line-height overrides the
+                    tighter h3 default in globals.css. */}
+                <h3 className="mt-4 text-lg text-moss-dark sm:min-h-[3.5rem] sm:text-xl">
+                  {service.title}
+                </h3>
+                <p className="mt-2.5 text-[0.95rem] leading-relaxed text-moss/75">
+                  {service.body}
+                </p>
+              </div>
+            </Reveal>
+          ))}
         </ul>
       </div>
     </section>

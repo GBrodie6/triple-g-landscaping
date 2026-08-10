@@ -17,7 +17,7 @@ const inter = Inter({
 });
 
 const description =
-  "Owner-operated lawn care and landscaping in Madison, CT. Weekly mowing, mulching and bed maintenance, spring and fall cleanups, snow and leaf removal, edging and trimming. 5.0 stars from 7 Google reviews.";
+  "Owner-operated lawn care and landscaping in Madison, CT. Mowing, edging, mulching, cleanups, tree and shrub care, aeration, and snow removal. 5.0 stars from 7 reviews.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -31,8 +31,12 @@ export const metadata: Metadata = {
     "landscaping Madison CT",
     "lawn mowing Connecticut shoreline",
     "mulching Madison CT",
-    "spring cleanup Madison CT",
-    "snow removal Madison CT",
+    "spring and fall cleanup Madison CT",
+    "leaf removal Madison CT",
+    "tree and shrub pruning Madison CT",
+    "lawn aeration and overseeding Madison CT",
+    "landscape design and installation Madison CT",
+    "snow plowing Madison CT",
   ],
   alternates: { canonical: "/" },
   openGraph: {
@@ -103,10 +107,13 @@ const localBusinessJsonLd = {
     name: "Lawn care & landscaping services",
     itemListElement: [
       "Weekly mowing",
+      "Edging and trimming",
       "Mulching and bed maintenance",
       "Spring and fall cleanups",
-      "Snow and leaf removal",
-      "Edging and trimming",
+      "Tree and shrub care",
+      "Aeration and lawn renovation",
+      "General landscaping",
+      "Snow and ice removal",
     ].map((name) => ({
       "@type": "Offer",
       itemOffered: { "@type": "Service", name },
