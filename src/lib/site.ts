@@ -27,7 +27,7 @@ export const site = {
 /**
  * Resolved at build time. Vercel sets VERCEL_PROJECT_PRODUCTION_URL to the
  * project's production domain, and updates it automatically once a custom
- * domain is attached — so no deployment URL is ever hardcoded here.
+ * domain is attached, so no deployment URL is ever hardcoded here.
  */
 export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??

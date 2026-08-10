@@ -4,7 +4,7 @@ import Reveal from "./Reveal";
 
 const points = [
   {
-    title: "Commercial equipment",
+    title: "Not homeowner-grade",
     body: "Zero-turn mowers, backpack blowers, and proper trimmers, not homeowner gear stretched across a route.",
   },
   {

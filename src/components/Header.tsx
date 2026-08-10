@@ -44,7 +44,7 @@ export default function Header() {
         <a
           href="#top"
           className="flex shrink-0 items-center gap-2.5"
-          aria-label={`${site.name} — back to top`}
+          aria-label={`${site.name}, back to top`}
         >
           {/* The logo file has an opaque white background, so it always sits
               on a light chip rather than directly on the header. */}

@@ -40,19 +40,20 @@ export default function Contact() {
     const service = String(data.get("service") ?? "").trim();
     const details = String(data.get("details") ?? "").trim();
 
-    const subject = `Quote request${name ? ` — ${name}` : ""}${
+    const subject = `Quote request${name ? ` from ${name}` : ""}${
       service ? ` (${service})` : ""
     }`;
 
+    const blank = "not provided";
     const body = [
-      `Name: ${name || "—"}`,
-      `Phone: ${phone || "—"}`,
-      `Email: ${email || "—"}`,
-      `Town: ${town || "—"}`,
-      `Service: ${service || "—"}`,
+      `Name: ${name || blank}`,
+      `Phone: ${phone || blank}`,
+      `Email: ${email || blank}`,
+      `Town: ${town || blank}`,
+      `Service: ${service || blank}`,
       "",
       "Details:",
-      details || "—",
+      details || blank,
     ].join("\n");
 
     window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
@@ -115,7 +116,7 @@ export default function Contact() {
                 <div>
                   <dt className={darkLabelClass}>Service area</dt>
                   <dd className="mt-1.5 leading-relaxed text-stone/80">
-                    {site.city}, {site.state} and nearby shoreline towns —{" "}
+                    {site.city}, {site.state} and nearby shoreline towns:{" "}
                     {site.serviceArea
                       .filter((town) => town !== site.city)
                       .join(", ")}

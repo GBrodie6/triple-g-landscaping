@@ -22,7 +22,7 @@ const description =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${site.name} — Lawn Care & Landscaping in ${site.city}, ${site.state}`,
+    default: `${site.name} | Lawn Care & Landscaping in ${site.city}, ${site.state}`,
     template: `%s | ${site.name}`,
   },
   description,
@@ -40,12 +40,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     siteName: site.name,
-    title: `${site.name} — Lawn Care & Landscaping in ${site.city}, ${site.state}`,
+    title: `${site.name} | Lawn Care & Landscaping in ${site.city}, ${site.state}`,
     description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Lawn Care & Landscaping in ${site.city}, ${site.state}`,
+    title: `${site.name} | Lawn Care & Landscaping in ${site.city}, ${site.state}`,
     description,
   },
   robots: { index: true, follow: true },
@@ -126,7 +126,7 @@ export default function RootLayout({
         {children}
         <script
           type="application/ld+json"
-          // Static, build-time literal — no user input reaches this string.
+          // Static, build-time literal. No user input reaches this string.
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
       </body>

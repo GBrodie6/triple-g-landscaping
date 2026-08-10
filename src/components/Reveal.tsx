@@ -37,7 +37,7 @@ export default function Reveal({
     const node = ref.current;
     if (!node || revealed) return;
 
-    // Safety net for environments without IntersectionObserver — show the
+    // Safety net for environments without IntersectionObserver. Show the
     // content rather than leaving it stuck at opacity 0.
     if (typeof IntersectionObserver === "undefined") {
       const frame = requestAnimationFrame(() => setRevealed(true));

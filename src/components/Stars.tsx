@@ -5,7 +5,7 @@ type StarsProps = {
 };
 
 /**
- * Five filled stars. Decorative — the numeric rating is always stated in
+ * Five filled stars. Decorative, since the numeric rating is always stated in
  * adjacent text, so this is hidden from assistive tech.
  */
 export default function Stars({ size = 18, className }: StarsProps) {

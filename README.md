@@ -1,8 +1,8 @@
 # Triple G Landscaping
 
-Marketing site for [Triple G Landscaping](https://github.com/GBrodie6/triple-g-landscaping) —
-residential lawn care and landscaping in Madison, CT and the surrounding
-shoreline towns.
+Marketing site for [Triple G Landscaping](https://github.com/GBrodie6/triple-g-landscaping),
+a residential lawn care and landscaping company in Madison, CT serving the
+surrounding shoreline towns.
 
 Next.js (App Router) · TypeScript · Tailwind CSS v4 · deployed on Vercel.
 
@@ -19,7 +19,7 @@ npm run build     # production build
 ```
 src/app/          layout, page, global styles, favicon + OG image
 src/components/   section components (Hero, Services, Gallery, Reviews, …)
-src/lib/site.ts   all business facts — phone, email, hours, service area
+src/lib/site.ts   all business facts: phone, email, hours, service area
 public/images/    real job photos, web-optimized
 scripts/          one-off image optimization script
 ```

@@ -88,7 +88,7 @@
     text-transform: uppercase;
   }
 
-  /* Skip link — visually hidden until focused. */
+  /* Skip link, visually hidden until focused. */
   .skip-link {
     position: absolute;
     left: 1rem;
@@ -128,7 +128,7 @@
   transform: translate3d(0, 0, 0);
 }
 
-/* Hero entrance — runs on load rather than on scroll. */
+/* Hero entrance. Runs on load rather than on scroll. */
 @keyframes hero-in {
   from {
     opacity: 0;

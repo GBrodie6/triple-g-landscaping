@@ -1,27 +1,31 @@
-# Triple G Landscaping — project conventions
+# Triple G Landscaping: project conventions
 
 Marketing site for Triple G Landscaping, a residential lawn care and landscaping
 company in Madison, CT run by Owen. Next.js App Router, TypeScript, Tailwind v4.
 
-## Standing convention — run this every session, without being asked
+## Standing convention: run this every session, without being asked
 
 At the end of any session where files changed, do all four steps in order:
 
-1. `npm run build` — confirm the production build passes with no errors.
+1. `npm run build`, confirming the production build passes with no errors.
 2. Commit the work with a clear message.
 3. `git push` to GitHub (`GBrodie6/triple-g-landscaping`, branch `main`).
-4. `vercel --prod` — deploy to Vercel production.
+4. `vercel --prod` to deploy to Vercel production.
 
 Do not wait to be asked for any of these. If the build fails, fix it before
 committing rather than pushing broken code.
 
 ## Copy rules
 
-- **Never use em dashes (—) in any copy on this site.** Use a comma, or split
-  the sentence in two. This applies to every user-facing string: headings, body
-  copy, captions, button labels, form labels and placeholders, alt text, and
-  page metadata. Verbatim customer reviews are the one exception, since those
-  are quoted exactly as written.
+- **Never use an em dash (U+2014) anywhere in this repo.** Use a comma, a colon,
+  a pipe, or split the sentence in two. This covers every user-facing string
+  (headings, body copy, captions, button labels, form labels and placeholders,
+  alt text, page metadata, `aria-label`s, and the quote-request email body) and
+  also code comments, this file, and the README, so that a repo-wide search for
+  the character returns nothing. Verbatim customer reviews would be the one
+  exception, since those are quoted exactly as written, but none currently
+  contain one.
+- En dashes stay where they belong: the ranges in `site.hours`.
 
 ## Things to know
 
@@ -33,7 +37,7 @@ committing rather than pushing broken code.
   `VERCEL_PROJECT_PRODUCTION_URL`. A custom domain will be attached later and
   must not require a code change.
 - **Business facts live in `src/lib/site.ts`.** Phone, email, hours, service
-  area, and the review count are all there — change them in one place.
+  area, and the review count are all there, so change them in one place.
 - **Photos are real customer properties.** Everything in `public/images` was
   shot on actual jobs. Don't replace them with stock imagery, and keep alt text
   specific ("freshly mowed lawn in Madison, CT", never "landscaping photo").
@@ -46,6 +50,6 @@ committing rather than pushing broken code.
   initial only. Don't invent testimonials or change the rating.
 - **Motion is restrained.** Subtle reveals on scroll, staggered in the gallery
   and reviews, hover lift on cards. Everything is disabled under
-  `prefers-reduced-motion` in `globals.css` — keep it that way.
+  `prefers-reduced-motion` in `globals.css`, so keep it that way.
 - **Accessibility.** Semantic sections, a skip link, and a visible `:focus-visible`
   outline. Don't remove focus styles.
