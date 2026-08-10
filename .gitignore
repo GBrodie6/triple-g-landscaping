@@ -18,4 +18,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Untouched camera files kept locally; scripts/optimize-images.mjs reads from
+# here to regenerate the web copies, the favicon, and the OG image.
 public/images/originals
