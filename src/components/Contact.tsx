@@ -71,7 +71,7 @@ export default function Contact() {
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-stone/75">
             Fastest way to get a number on your property. Tell us the town and what the
-            yard needs — most quotes come back the same day.
+            yard needs. Most quotes come back the same day.
           </p>
         </Reveal>
 

@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 const points = [
   {
     title: "Commercial equipment",
-    body: "Zero-turn mowers, backpack blowers, and proper trimmers — not homeowner gear stretched across a route.",
+    body: "Zero-turn mowers, backpack blowers, and proper trimmers, not homeowner gear stretched across a route.",
   },
   {
     title: "Owner on the job",
@@ -35,11 +35,11 @@ export default function Equipment() {
         <Reveal delay={120}>
           <p className="eyebrow text-sage-light">Real crews, real equipment</p>
           <h2 className="mt-3 text-[clamp(1.9rem,5vw,3rem)] text-stone-light">
-            Small enough to care, equipped to keep up.
+            Commercial equipment, run by the guy who quotes the job.
           </h2>
           <p className="mt-5 leading-relaxed text-stone/75">
             Triple G started in {site.established} with one mower and a handful of
-            neighbors. It runs the same way now — {site.owner} quotes the job, does the
+            neighbors. It runs the same way now. {site.owner} quotes the job, does the
             job, and stands behind it.
           </p>
 

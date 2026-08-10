@@ -31,7 +31,7 @@ const services: Service[] = [
   },
   {
     title: "Mulching & Bed Maintenance",
-    body: "Fresh mulch, weeded beds, and shaped shrubs — the detail work that makes the whole property look cared for.",
+    body: "Fresh mulch, weeded beds, and shaped shrubs, the detail work that makes the whole property look cared for.",
     Icon: MulchIcon,
     image: {
       src: "/images/flowerbed-4.jpg",

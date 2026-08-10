@@ -15,6 +15,14 @@ At the end of any session where files changed, do all four steps in order:
 Do not wait to be asked for any of these. If the build fails, fix it before
 committing rather than pushing broken code.
 
+## Copy rules
+
+- **Never use em dashes (—) in any copy on this site.** Use a comma, or split
+  the sentence in two. This applies to every user-facing string: headings, body
+  copy, captions, button labels, form labels and placeholders, alt text, and
+  page metadata. Verbatim customer reviews are the one exception, since those
+  are quoted exactly as written.
+
 ## Things to know
 
 - **No backend.** The quote form composes a `mailto:` link to

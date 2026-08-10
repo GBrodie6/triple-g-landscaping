@@ -59,7 +59,7 @@ export default function Hero() {
             style={{ "--hero-delay": "340ms" } as React.CSSProperties}
           >
             Weekly mowing, mulching, and seasonal cleanups for homes in {site.city} and
-            along the Connecticut shoreline — done by {site.owner}, the same person who
+            along the Connecticut shoreline, done by {site.owner}, the same person who
             answers the phone.
           </p>
 

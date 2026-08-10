@@ -13,7 +13,7 @@ const photos: Photo[] = [
   {
     src: "/images/lawn-2.jpg",
     alt: "Striped green lawn sloping toward a Madison, CT home after a spring mowing",
-    caption: "Spring mowing — Madison, CT",
+    caption: "Spring mowing, Madison, CT",
     focus: "50% 55%",
   },
   {
@@ -46,15 +46,11 @@ export default function Gallery() {
   return (
     <section id="gallery" className="bg-stone py-20 sm:py-28">
       <div className="container-x">
-        <Reveal className="max-w-2xl">
+        <Reveal className="max-w-3xl">
           <p className="eyebrow text-clay">Our work</p>
           <h2 className="mt-3 text-[clamp(2rem,5.4vw,3.25rem)] text-moss-dark">
-            Every photo is a real yard.
+            Recent work around Madison and the shoreline.
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-moss/80">
-            Shot on properties around Madison and the shoreline — no stock photos, no
-            other company&apos;s work.
-          </p>
         </Reveal>
 
         <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
