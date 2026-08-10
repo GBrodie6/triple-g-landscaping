@@ -40,7 +40,7 @@ export default function Reviews() {
           <div className="max-w-2xl">
             <p className="eyebrow text-clay">Reviews</p>
             <h2 className="mt-3 text-[clamp(2rem,5.4vw,3.25rem)] text-moss-dark">
-              Neighbors who kept us on.
+              What customers say.
             </h2>
           </div>
 

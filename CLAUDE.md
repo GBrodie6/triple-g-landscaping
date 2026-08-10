@@ -26,6 +26,12 @@ committing rather than pushing broken code.
   exception, since those are quoted exactly as written, but none currently
   contain one.
 - En dashes stay where they belong: the ranges in `site.hours`.
+- **Headlines and section titles are plain and literal.** Say what the section
+  is. No wordplay, no clever double meanings, no lines that only land on the
+  second read. When a plain version and a clever version are both on the table,
+  use the plain one. "What customers say." beats "Neighbors who kept us on.";
+  "Recent work around Madison and the shoreline." beats "Every photo is a real
+  yard."
 
 ## Things to know
 
