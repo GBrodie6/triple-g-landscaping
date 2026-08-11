@@ -9,6 +9,7 @@ type Photo = {
   focus?: string;
 };
 
+/** Ten photos plus the closing call to action fill the grid exactly. */
 const photos: Photo[] = [
   {
     src: "/images/lawn-2.jpg",
@@ -17,16 +18,40 @@ const photos: Photo[] = [
     focus: "50% 55%",
   },
   {
+    src: "/images/mulch-1.jpg",
+    alt: "Freshly mulched bed planted with ornamental grasses curving around the side of a Connecticut home",
+    caption: "New mulch bed on a side yard",
+    focus: "50% 52%",
+  },
+  {
     src: "/images/flowerbed-1.jpg",
     alt: "Dark mulch bed with lavender and trimmed shrubs along a brick walkway at a shoreline Connecticut home",
     caption: "Mulch beds along the front walk",
     focus: "50% 45%",
   },
   {
+    src: "/images/leaf-1.jpg",
+    alt: "Zero-turn mower on a lawn beside a long row of leaves cleared to the driveway edge during a fall cleanup",
+    caption: "Fall cleanup along the driveway",
+    focus: "50% 50%",
+  },
+  {
     src: "/images/flowerbed-3.jpg",
     alt: "Trimmed shrubs and fresh mulch edged against a brick patio beside a Connecticut home",
     caption: "Beds edged to the patio line",
     focus: "50% 50%",
+  },
+  {
+    src: "/images/snow-1.jpg",
+    alt: "Residential driveway plowed down to the pavement between snowbanks after a winter storm in Madison, CT",
+    caption: "Driveway cleared after a storm",
+    focus: "50% 45%",
+  },
+  {
+    src: "/images/flowerbed-6.jpg",
+    alt: "Wheelbarrow beside a newly mulched flower bed with pink azaleas in bloom",
+    caption: "Beds mulched and replanted for spring",
+    focus: "50% 45%",
   },
   {
     src: "/images/flowerbed-2.jpg",
@@ -38,6 +63,12 @@ const photos: Photo[] = [
     src: "/images/flowerbed-5.jpg",
     alt: "Fresh mulch ring installed around a mature shade tree on a Madison, CT lawn",
     caption: "Mulch ring around a mature oak",
+    focus: "50% 50%",
+  },
+  {
+    src: "/images/mulch-2.jpg",
+    alt: "Mulched roadside bed behind a fieldstone wall with the Triple G Landscaping sign at the curb",
+    caption: "Roadside bed edged to the stone wall",
     focus: "50% 50%",
   },
 ];
@@ -58,7 +89,9 @@ export default function Gallery() {
             <Reveal
               key={photo.src}
               as="li"
-              delay={i * 110}
+              // Stagger within each row rather than across all ten, so the
+              // last tiles don't wait a full second to appear.
+              delay={(i % 3) * 110}
               className="lift zoom-frame group relative aspect-[4/3] overflow-hidden rounded-2xl bg-moss-dark sm:aspect-[3/4]"
             >
               <Image
@@ -79,11 +112,12 @@ export default function Gallery() {
             </Reveal>
           ))}
 
-          {/* Sixth cell keeps the grid square and gives the section an exit. */}
+          {/* Spans the leftover columns so the last row finishes flush, and
+              gives the section an exit. */}
           <Reveal
             as="li"
-            delay={photos.length * 110}
-            className="lift group relative flex aspect-[4/3] flex-col justify-between overflow-hidden rounded-2xl bg-moss p-7 sm:aspect-[3/4]"
+            delay={(photos.length % 3) * 110}
+            className="lift group relative flex aspect-[4/3] flex-col justify-center overflow-hidden rounded-2xl bg-moss p-7 sm:col-span-2 sm:aspect-auto sm:min-h-[16rem] sm:p-10"
           >
             <div
               className="absolute inset-0 opacity-20"
@@ -93,9 +127,9 @@ export default function Gallery() {
                   "repeating-linear-gradient(115deg, transparent 0 16px, rgba(143,169,104,0.55) 16px 17px)",
               }}
             />
-            <p className="relative eyebrow text-sage-light">Your yard next</p>
             <div className="relative">
-              <p className="font-display text-2xl leading-tight font-extrabold tracking-[-0.03em] text-stone-light sm:text-3xl">
+              <p className="eyebrow text-sage-light">Your yard next</p>
+              <p className="mt-4 font-display text-2xl leading-tight font-extrabold tracking-[-0.03em] text-stone-light sm:text-3xl">
                 Want your lawn on this page?
               </p>
               <a

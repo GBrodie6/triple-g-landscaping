@@ -8,6 +8,7 @@
  *
  *   node scripts/optimize-images.mjs               all assets
  *   node scripts/optimize-images.mjs --brand-only  logo, icons, and OG only
+ *   node scripts/optimize-images.mjs snow-1.jpg    only the files named
  */
 import { cp, mkdir, readdir, stat } from "node:fs/promises";
 import path from "node:path";
@@ -40,12 +41,19 @@ async function main() {
     console.log("Backed up originals ->", path.relative(root, originalsDir));
   }
 
-  // Re-encoding the photos is idempotent but rewrites ~12MB of binaries, so
-  // pass --brand-only when just the logo, favicon, and OG image have changed.
+  // Re-encoding every photo is idempotent but rewrites ~12MB of binaries, so
+  // pass --brand-only when just the logo, favicon, and OG image have changed,
+  // or name specific files to process only those.
   const brandOnly = process.argv.includes("--brand-only");
+  const named = process.argv.slice(2).filter((a) => !a.startsWith("--"));
   const sources = (await readdir(originalsDir))
     .filter((f) => /\.(jpe?g|png)$/i.test(f))
-    .filter((f) => !brandOnly || f === "logo.png");
+    .filter((f) => (named.length ? named.includes(f) : !brandOnly || f === "logo.png"));
+
+  const missing = named.filter((n) => !sources.includes(n));
+  if (missing.length) {
+    throw new Error(`not found in originals/: ${missing.join(", ")}`);
+  }
 
   for (const file of sources) {
     const src = path.join(originalsDir, file);

@@ -29,11 +29,11 @@ export default function Equipment() {
         </Reveal>
 
         <Reveal delay={120}>
-          <p className="eyebrow text-sage-light">Real crews, real equipment</p>
-          <h2 className="mt-3 text-[clamp(1.9rem,5vw,3rem)] text-stone-light">
-            Commercial equipment, run by the guy who quotes the job.
-          </h2>
-          <p className="mt-5 leading-relaxed text-stone/75">
+          {/* The section runs without a display headline, so the label carries
+              the heading semantics and the lead paragraph takes the visual
+              weight the headline used to. */}
+          <h2 className="eyebrow text-sage-light">Reliability</h2>
+          <p className="mt-6 text-xl leading-relaxed text-stone/85 sm:text-2xl sm:leading-relaxed">
             Triple G started in {site.established} with one mower and a handful of
             neighbors. It runs the same way now. {site.owner} quotes the job, does the
             job, and stands behind it.
@@ -41,7 +41,7 @@ export default function Equipment() {
 
           {/* Two points sit side by side so the pair reads as complete rather
               than like a list with an item missing. */}
-          <dl className="mt-9 grid gap-6 border-t border-stone/15 pt-8 sm:grid-cols-2 sm:gap-8">
+          <dl className="mt-10 grid gap-6 border-t border-stone/15 pt-8 sm:grid-cols-2 sm:gap-8">
             {points.map((point) => (
               <div key={point.title} className="border-l-2 border-sage/45 pl-5">
                 <dt className="font-display text-lg font-extrabold tracking-[-0.02em] text-stone-light">

@@ -22,8 +22,9 @@ type Service = {
 };
 
 /**
- * Ordered so the four cards backed by real job photos fill the first row on
- * large screens and the four icon panels fill the second.
+ * Ordered so the five cards backed by real job photos come first and the three
+ * icon panels close the grid, keeping photos and panels contiguous in reading
+ * order rather than scattered.
  */
 const services: Service[] = [
   {
@@ -61,10 +62,20 @@ const services: Service[] = [
     body: "Beds cut back, leaves cleared, debris hauled off, and the yard reset so the season starts and ends the right way.",
     Icon: CleanupIcon,
     image: {
-      src: "/images/flowerbed-6.jpg",
-      alt: "Wheelbarrow beside a newly mulched flower bed with pink azaleas in bloom",
+      src: "/images/leaf-2.jpg",
+      alt: "Autumn leaves raked into a long row along a driveway during a fall cleanup in Madison, CT",
     },
     focus: "50% 45%",
+  },
+  {
+    title: "Snow & Ice Removal",
+    body: "Driveways and walkways plowed after each storm, and salt down on the ice so the property stays walkable all winter.",
+    Icon: SnowIcon,
+    image: {
+      src: "/images/snow-2.jpg",
+      alt: "Driveway plowed clear to the pavement up to the garage at a Madison, CT home after a snowstorm",
+    },
+    focus: "50% 42%",
   },
   {
     title: "Tree & Shrub Care",
@@ -80,11 +91,6 @@ const services: Service[] = [
     title: "General Landscaping",
     body: "Design and installation for new landscaping features, plus ongoing upkeep for larger properties.",
     Icon: ShovelIcon,
-  },
-  {
-    title: "Snow & Ice Removal",
-    body: "Driveways and walkways plowed after each storm, and salt down on the ice so the property stays walkable all winter.",
-    Icon: SnowIcon,
   },
 ];
 
