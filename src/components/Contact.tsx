@@ -149,13 +149,10 @@ export default function Contact() {
             <p className="mt-9 flex flex-wrap items-center gap-x-3 gap-y-1.5 border-t border-stone/15 pt-6 text-sm text-stone/75">
               <Stars size={15} className="text-sage-light" />
               <span className="font-display font-extrabold text-stone-light">
-                {site.rating.toFixed(1)} stars
+                {site.rating.toFixed(1)} stars on Google
               </span>
               <span aria-hidden="true" className="h-3.5 w-px bg-stone/30" />
-              <span>
-                {site.reviewCount} Google reviews · serving the shoreline since{" "}
-                {site.established}
-              </span>
+              <span>Serving the shoreline since {site.established}</span>
             </p>
           </Reveal>
 

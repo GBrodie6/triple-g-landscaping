@@ -50,9 +50,7 @@ export default function Reviews() {
             </span>
             <span className="flex flex-col gap-1">
               <Stars size={16} className="text-clay" />
-              <span className="text-sm text-moss/75">
-                {site.reviewCount} Google reviews
-              </span>
+              <span className="text-sm text-moss/75">stars on Google</span>
             </span>
           </div>
         </Reveal>

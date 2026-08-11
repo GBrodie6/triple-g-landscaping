@@ -89,11 +89,7 @@ export default function Hero() {
           >
             <Stars size={17} className="text-sage-light" />
             <span className="font-display text-sm font-extrabold tracking-[-0.01em] text-stone-light">
-              {site.rating.toFixed(1)} stars
-            </span>
-            <span aria-hidden="true" className="h-3.5 w-px bg-stone-light/30" />
-            <span className="text-sm text-stone/80">
-              {site.reviewCount} Google reviews
+              {site.rating.toFixed(1)} stars on Google
             </span>
           </div>
         </div>

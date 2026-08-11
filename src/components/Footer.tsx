@@ -96,8 +96,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
           <p>
-            {site.city}, {site.state} · {site.rating.toFixed(1)} stars from{" "}
-            {site.reviewCount} Google reviews
+            {site.city}, {site.state} · {site.rating.toFixed(1)} stars on Google
           </p>
         </div>
       </div>

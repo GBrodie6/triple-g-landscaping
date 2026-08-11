@@ -39,9 +39,11 @@ async function main() {
     console.log("Backed up originals ->", path.relative(root, originalsDir));
   }
 
-  const sources = (await readdir(originalsDir)).filter((f) =>
-    /\.(jpe?g|png)$/i.test(f),
-  );
+  // Re-encoding the photos is idempotent but rewrites ~12MB of binaries, so
+  // pass --og-only when just the favicon and OG image need regenerating.
+  const sources = process.argv.includes("--og-only")
+    ? []
+    : (await readdir(originalsDir)).filter((f) => /\.(jpe?g|png)$/i.test(f));
 
   for (const file of sources) {
     const src = path.join(originalsDir, file);
@@ -130,7 +132,7 @@ async function main() {
       </text>
       <text x="74" y="524" font-family="Arial, Helvetica, sans-serif"
             font-size="27" font-weight="bold" fill="#E7E2D4">
-        (203) 994-1680  ·  5.0 stars from 7 Google reviews
+        (203) 994-1680  ·  5.0 stars on Google
       </text>
     </svg>
   `);

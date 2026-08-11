@@ -17,6 +17,10 @@ export const site = {
     "Durham",
   ],
   rating: 5.0,
+  /**
+   * Structured data only. The review count is deliberately kept out of visible
+   * copy, which says "5.0 stars on Google" with no number attached.
+   */
   reviewCount: 7,
   hours: [
     { days: "Monday – Friday", time: "7:30am – 5:00pm" },
