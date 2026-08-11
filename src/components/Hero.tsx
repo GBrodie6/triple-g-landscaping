@@ -58,9 +58,9 @@ export default function Hero() {
             className="hero-in mt-6 max-w-xl text-lg leading-relaxed text-stone/85 sm:text-xl"
             style={{ "--hero-delay": "340ms" } as React.CSSProperties}
           >
-            Weekly mowing, mulching, and seasonal cleanups for homes in {site.city} and
-            along the Connecticut shoreline, done by {site.owner}, the same person who
-            answers the phone.
+            {site.owner} runs every job himself, mowing, mulching, and seasonal
+            cleanups for homes across {site.city} and the Connecticut shoreline.
+            He&apos;s also the one who answers the phone when you call.
           </p>
 
           <div

@@ -6,7 +6,8 @@
  * Originals are copied to public/images/originals (gitignored) first, so the
  * script can be re-run without compounding compression.
  *
- *   node scripts/optimize-images.mjs
+ *   node scripts/optimize-images.mjs               all assets
+ *   node scripts/optimize-images.mjs --brand-only  logo, icons, and OG only
  */
 import { cp, mkdir, readdir, stat } from "node:fs/promises";
 import path from "node:path";
@@ -40,10 +41,11 @@ async function main() {
   }
 
   // Re-encoding the photos is idempotent but rewrites ~12MB of binaries, so
-  // pass --og-only when just the favicon and OG image need regenerating.
-  const sources = process.argv.includes("--og-only")
-    ? []
-    : (await readdir(originalsDir)).filter((f) => /\.(jpe?g|png)$/i.test(f));
+  // pass --brand-only when just the logo, favicon, and OG image have changed.
+  const brandOnly = process.argv.includes("--brand-only");
+  const sources = (await readdir(originalsDir))
+    .filter((f) => /\.(jpe?g|png)$/i.test(f))
+    .filter((f) => !brandOnly || f === "logo.png");
 
   for (const file of sources) {
     const src = path.join(originalsDir, file);
@@ -137,19 +139,16 @@ async function main() {
     </svg>
   `);
 
+  // The logo art carries its own flat white background, so the chip is white
+  // too and the two read as one badge instead of a white square on cream.
   const logoChip = await sharp({
-    create: {
-      width: 168,
-      height: 168,
-      channels: 4,
-      background: "#F2EFE6",
-    },
+    create: { width: 168, height: 168, channels: 4, background: "#FFFFFF" },
   })
     .composite([
       {
         input: await sharp(logo)
-          .resize(140, 140, { fit: "contain", background: "#F2EFE6" })
-          .flatten({ background: "#F2EFE6" })
+          .resize(152, 152, { fit: "contain", background: "#FFFFFF" })
+          .flatten({ background: "#FFFFFF" })
           .toBuffer(),
         gravity: "centre",
       },
