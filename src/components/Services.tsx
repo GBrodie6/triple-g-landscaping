@@ -21,9 +21,8 @@ type Service = {
 };
 
 /**
- * Ordered so the five cards backed by real job photos come first and the two
- * icon panels close the grid, keeping photos and panels contiguous in reading
- * order rather than scattered.
+ * Every service now carries a real job photo. The icon-panel branch below is
+ * kept for any service added later that has no photo yet.
  */
 const services: Service[] = [
   {
@@ -80,11 +79,21 @@ const services: Service[] = [
     title: "Tree & Shrub Care",
     body: "Pruning and trimming that keeps trees and shrubs healthy and shaped right, done at the times of year that actually help growth.",
     Icon: TreeIcon,
+    image: {
+      src: "/images/flowerbed-5.jpg",
+      alt: "Mulch bed curved around a mature oak with clipped evergreen shrubs on a Madison, CT lawn",
+    },
+    focus: "50% 50%",
   },
   {
     title: "General Landscaping",
     body: "Design and installation for new landscaping features, plus ongoing upkeep for larger properties.",
     Icon: ShovelIcon,
+    image: {
+      src: "/images/flowerbed-1.jpg",
+      alt: "Brick walkway curving past mulched beds of lavender and shrubs at the front of a shoreline Connecticut home",
+    },
+    focus: "50% 45%",
   },
 ];
 

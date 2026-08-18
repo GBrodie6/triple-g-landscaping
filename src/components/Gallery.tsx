@@ -9,8 +9,7 @@ type Photo = {
   focus?: string;
 };
 
-/** Twelve photos, four rows of three, with the call to action as a final
- *  full-width row. */
+/** Ten photos plus the closing call to action fill the grid exactly. */
 const photos: Photo[] = [
   {
     src: "/images/lawn-2.jpg",
@@ -23,12 +22,6 @@ const photos: Photo[] = [
     alt: "Freshly mulched bed planted with ornamental grasses curving around the side of a Connecticut home",
     caption: "New mulch bed on a side yard",
     focus: "50% 52%",
-  },
-  {
-    src: "/images/flowerbed-1.jpg",
-    alt: "Dark mulch bed with lavender and trimmed shrubs along a brick walkway at a shoreline Connecticut home",
-    caption: "Mulch beds along the front walk",
-    focus: "50% 45%",
   },
   {
     src: "/images/leaf-1.jpg",
@@ -59,12 +52,6 @@ const photos: Photo[] = [
     alt: "Freshly mulched bed cut along a shaded tree line beside a mowed lawn in Madison, CT",
     caption: "New bed cut along the tree line",
     focus: "50% 55%",
-  },
-  {
-    src: "/images/flowerbed-5.jpg",
-    alt: "Fresh mulch ring installed around a mature shade tree on a Madison, CT lawn",
-    caption: "Mulch ring around a mature oak",
-    focus: "50% 50%",
   },
   {
     src: "/images/mulch-2.jpg",
@@ -130,7 +117,7 @@ export default function Gallery() {
           <Reveal
             as="li"
             delay={(photos.length % 3) * 110}
-            className="lift group relative flex aspect-[4/3] flex-col justify-center overflow-hidden rounded-2xl bg-moss p-7 sm:col-span-2 sm:aspect-auto sm:min-h-[14rem] sm:p-10 lg:col-span-3"
+            className="lift group relative flex aspect-[4/3] flex-col justify-center overflow-hidden rounded-2xl bg-moss p-7 sm:col-span-2 sm:aspect-auto sm:min-h-[16rem] sm:p-10"
           >
             <div
               className="absolute inset-0 opacity-20"
