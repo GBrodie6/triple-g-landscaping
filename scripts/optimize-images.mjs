@@ -46,11 +46,17 @@ async function main() {
   // or name specific files to process only those.
   const brandOnly = process.argv.includes("--brand-only");
   const named = process.argv.slice(2).filter((a) => !a.startsWith("--"));
+  // Brand artwork is handled separately below, where the white background
+  // is knocked out, so it must not go through the plain photo pipeline.
+  const brandFiles = ["favicon-logo.png", "logo-horizontal.png", "logo.png"];
   const sources = (await readdir(originalsDir))
     .filter((f) => /\.(jpe?g|png)$/i.test(f))
-    .filter((f) => (named.length ? named.includes(f) : !brandOnly || f === "logo.png"));
+    .filter((f) => !brandFiles.includes(f))
+    .filter((f) => (named.length ? named.includes(f) : !brandOnly));
 
-  const missing = named.filter((n) => !sources.includes(n));
+  const missing = named.filter(
+    (n) => !sources.includes(n) && !brandFiles.includes(n),
+  );
   if (missing.length) {
     throw new Error(`not found in originals/: ${missing.join(", ")}`);
   }
@@ -89,29 +95,90 @@ async function main() {
     );
   }
 
-  // --- Favicon / app icons -------------------------------------------------
-  const logo = path.join(originalsDir, "logo.png");
-  const logoMeta = await sharp(logo).metadata();
-  console.log("\nlogo alpha channel:", logoMeta.hasAlpha, "channels:", logoMeta.channels);
+  // --- Brand marks ---------------------------------------------------------
+  // Both source files are black-and-green artwork on flat white. Knocking the
+  // white out gives a mark that sits on cream and on near-black without a
+  // chip behind it; the light variant recolours the black art for dark
+  // surfaces. Chromatic pixels (the green) are left alone.
+  async function knockOutWhite(file, artColor, chromaColor) {
+    const { data, info } = await sharp(file)
+      .flatten({ background: "#ffffff" })
+      .trim({ background: "#ffffff", threshold: 12 })
+      .ensureAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true });
 
-  await sharp(logo)
-    .resize(512, 512, { fit: "contain", background: "#ffffff" })
-    .flatten({ background: "#ffffff" })
-    .png()
-    .toFile(path.join(appDir, "icon.png"));
+    const px = Buffer.from(data);
+    for (let i = 0; i < px.length; i += info.channels) {
+      const r = px[i];
+      const g = px[i + 1];
+      const b = px[i + 2];
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
 
-  await sharp(logo)
-    .resize(160, 160, { fit: "contain", background: "#ffffff" })
-    .extend({
-      top: 10,
-      bottom: 10,
-      left: 10,
-      right: 10,
-      background: "#ffffff",
-    })
+      if (max - min >= 40) {
+        // The green. Recoloured only for the dark-surface variant, where the
+        // original forest green has too little contrast to read.
+        if (chromaColor) {
+          px[i] = chromaColor[0];
+          px[i + 1] = chromaColor[1];
+          px[i + 2] = chromaColor[2];
+        }
+      } else {
+        // Greyscale: white background, black artwork, and the antialiased
+        // steps between them. Alpha follows how dark the pixel was.
+        px[i] = artColor[0];
+        px[i + 1] = artColor[1];
+        px[i + 2] = artColor[2];
+        px[i + 3] = 255 - max;
+      }
+    }
+
+    return sharp(px, { raw: { width: info.width, height: info.height, channels: info.channels } })
+      .png({ compressionLevel: 9 })
+      .toBuffer();
+  }
+
+  const INK = [20, 20, 18];
+  const STONE = [242, 239, 230];
+  const SAGE = [173, 196, 138];
+
+  const faviconSrc = path.join(originalsDir, "favicon-logo.png");
+  const wordmarkSrc = path.join(originalsDir, "logo-horizontal.png");
+
+  const wordmarkDark = await knockOutWhite(wordmarkSrc, INK);
+  const wordmarkLight = await knockOutWhite(wordmarkSrc, STONE, SAGE);
+
+  await sharp(wordmarkDark)
+    .resize({ width: 900, fit: "inside" })
+    .toFile(path.join(imagesDir, "logo-horizontal.png"));
+  await sharp(wordmarkLight)
+    .resize({ width: 900, fit: "inside" })
+    .toFile(path.join(imagesDir, "logo-horizontal-light.png"));
+
+  for (const f of ["logo-horizontal.png", "logo-horizontal-light.png"]) {
+    const m = await sharp(path.join(imagesDir, f)).metadata();
+    console.log(`\n${f.padEnd(28)} ${m.width}x${m.height} alpha=${m.hasAlpha}`);
+  }
+
+  // Icons come from the simplified mark, squared up on white since favicons
+  // are composited against unpredictable browser chrome.
+  const faviconTrimmed = await sharp(faviconSrc)
     .flatten({ background: "#ffffff" })
-    .png()
-    .toFile(path.join(appDir, "apple-icon.png"));
+    .trim({ background: "#ffffff", threshold: 12 })
+    .toBuffer();
+
+  for (const [name, size, pad] of [
+    ["icon.png", 512, 56],
+    ["apple-icon.png", 180, 22],
+  ]) {
+    await sharp(faviconTrimmed)
+      .resize(size - pad * 2, size - pad * 2, { fit: "contain", background: "#ffffff" })
+      .extend({ top: pad, bottom: pad, left: pad, right: pad, background: "#ffffff" })
+      .flatten({ background: "#ffffff" })
+      .png()
+      .toFile(path.join(appDir, name));
+  }
 
   // --- Open Graph image ----------------------------------------------------
   const W = 1200;
@@ -126,48 +193,34 @@ async function main() {
     <svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#131a0d" stop-opacity="0.55"/>
-          <stop offset="55%" stop-color="#131a0d" stop-opacity="0.78"/>
-          <stop offset="100%" stop-color="#131a0d" stop-opacity="0.95"/>
+          <stop offset="0%" stop-color="#0f0f0e" stop-opacity="0.50"/>
+          <stop offset="55%" stop-color="#0f0f0e" stop-opacity="0.80"/>
+          <stop offset="100%" stop-color="#0f0f0e" stop-opacity="0.96"/>
         </linearGradient>
       </defs>
       <rect width="${W}" height="${H}" fill="url(#g)"/>
-      <text x="72" y="392" font-family="Arial Black, Arial, Helvetica, sans-serif"
-            font-size="76" font-weight="900" letter-spacing="-3" fill="#F2EFE6">
-        TRIPLE G LANDSCAPING
-      </text>
-      <text x="74" y="450" font-family="Arial, Helvetica, sans-serif"
+      <text x="74" y="486" font-family="Arial, Helvetica, sans-serif"
             font-size="31" fill="#ADC48A">
         Lawn care &amp; landscaping · Madison, CT &amp; the shoreline
       </text>
-      <text x="74" y="524" font-family="Arial, Helvetica, sans-serif"
+      <text x="74" y="548" font-family="Arial, Helvetica, sans-serif"
             font-size="27" font-weight="bold" fill="#E7E2D4">
         (203) 994-1680  ·  5.0 stars on Google
       </text>
     </svg>
   `);
 
-  // The logo art carries its own flat white background, so the chip is white
-  // too and the two read as one badge instead of a white square on cream.
-  const logoChip = await sharp({
-    create: { width: 168, height: 168, channels: 4, background: "#FFFFFF" },
-  })
-    .composite([
-      {
-        input: await sharp(logo)
-          .resize(152, 152, { fit: "contain", background: "#FFFFFF" })
-          .flatten({ background: "#FFFFFF" })
-          .toBuffer(),
-        gravity: "centre",
-      },
-    ])
+  // The share card is a dark overlay, so the light wordmark sits on it
+  // directly rather than inside a chip.
+  const logoChip = await sharp(wordmarkLight)
+    .resize({ width: 360, fit: "inside" })
     .png()
     .toBuffer();
 
   await sharp(bg)
     .composite([
       { input: overlay, top: 0, left: 0 },
-      { input: logoChip, top: 88, left: 72 },
+      { input: logoChip, top: 250, left: 72 },
     ])
     .jpeg({ quality: 86, mozjpeg: true })
     .toFile(path.join(appDir, "opengraph-image.jpg"));

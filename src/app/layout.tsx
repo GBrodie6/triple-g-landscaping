@@ -17,7 +17,7 @@ const inter = Inter({
 });
 
 const description =
-  "Owner-operated lawn care and landscaping in Madison, CT. Mowing, edging, mulching, cleanups, tree and shrub care, aeration, and snow removal. 5.0 stars on Google.";
+  "Owner-operated lawn care and landscaping in Madison, CT. Mowing, mulching, cleanups, tree and shrub care, aeration, landscaping, and snow removal. 5.0 stars on Google.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#2c3b1f",
+  themeColor: "#0f0f0e",
   colorScheme: "light",
 };
 
@@ -71,7 +71,7 @@ const localBusinessJsonLd = {
   founder: { "@type": "Person", name: site.owner },
   foundingDate: String(site.established),
   image: `${siteUrl}/images/lawn-1.jpg`,
-  logo: `${siteUrl}/images/logo.png`,
+  logo: `${siteUrl}/images/logo-horizontal.png`,
   address: {
     "@type": "PostalAddress",
     addressLocality: site.city,
@@ -107,7 +107,6 @@ const localBusinessJsonLd = {
     name: "Lawn care & landscaping services",
     itemListElement: [
       "Weekly mowing",
-      "Edging and trimming",
       "Mulching and bed maintenance",
       "Spring and fall cleanups",
       "Tree and shrub care",

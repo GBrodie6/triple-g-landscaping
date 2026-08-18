@@ -32,6 +32,13 @@ export default function Header() {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // The bar is transparent over the near-black hero and cream once
+  // scrolled, so the call button flips to keep contrast on both.
+  const callTone =
+    scrolled || open
+      ? "bg-ink text-stone-light hover:bg-ink-soft"
+      : "bg-sage-light text-night hover:bg-sage";
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
@@ -43,37 +50,25 @@ export default function Header() {
       <div className="container-x flex h-20 items-center justify-between gap-4">
         <a
           href="#top"
-          className="flex shrink-0 items-center gap-2.5"
+          className="flex shrink-0 items-center"
           aria-label={`${site.name}, back to top`}
         >
-          {/* The logo file has an opaque white background, so it always sits
-              on a light chip rather than directly on the header. */}
-          <span className="grid size-11 place-items-center overflow-hidden rounded-xl bg-stone-light shadow-sm">
-            <Image
-              src="/images/logo.png"
-              alt=""
-              width={44}
-              height={44}
-              className="size-11 object-contain"
-              priority
-            />
-          </span>
-          <span className="flex flex-col leading-none">
-            <span
-              className={`font-display text-[0.95rem] font-extrabold tracking-[-0.03em] uppercase transition-colors duration-300 sm:text-lg ${
-                scrolled || open ? "text-moss-dark" : "text-stone-light"
-              }`}
-            >
-              Triple G
-            </span>
-            <span
-              className={`font-display text-[0.6rem] font-bold tracking-[0.22em] uppercase transition-colors duration-300 sm:text-[0.65rem] ${
-                scrolled || open ? "text-moss/70" : "text-stone-light/80"
-              }`}
-            >
-              Landscaping
-            </span>
-          </span>
+          {/* Both variants have the white knocked out of the artwork, so the
+              mark sits straight on the header. The light one is for the dark
+              hero behind the transparent header, the dark one for the cream
+              bar after scrolling. */}
+          <Image
+            src={
+              scrolled || open
+                ? "/images/logo-horizontal.png"
+                : "/images/logo-horizontal-light.png"
+            }
+            alt=""
+            width={900}
+            height={390}
+            className="h-12 w-auto sm:h-14"
+            priority
+          />
         </a>
 
         <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">
@@ -83,7 +78,7 @@ export default function Header() {
               href={link.href}
               className={`font-display text-sm font-bold tracking-[-0.01em] transition-colors ${
                 scrolled
-                  ? "text-moss-dark hover:text-clay"
+                  ? "text-moss-dark hover:text-ink"
                   : "text-stone-light hover:text-sage-light"
               }`}
             >
@@ -95,7 +90,7 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <a
             href={`tel:${site.phoneHref}`}
-            className="hidden items-center gap-2 rounded-full bg-clay px-5 py-3 font-display text-sm font-bold tracking-[-0.01em] text-stone-light transition-colors hover:bg-clay-dark sm:inline-flex"
+            className={`hidden items-center gap-2 rounded-full px-5 py-3 font-display text-sm font-bold tracking-[-0.01em] transition-colors sm:inline-flex ${callTone}`}
           >
             <PhoneIcon className="size-4" />
             {site.phoneDisplay}
@@ -103,7 +98,7 @@ export default function Header() {
 
           <a
             href={`tel:${site.phoneHref}`}
-            className="inline-flex items-center gap-2 rounded-full bg-clay px-4 py-3 font-display text-sm font-bold text-stone-light transition-colors hover:bg-clay-dark sm:hidden"
+            className={`inline-flex items-center gap-2 rounded-full px-4 py-3 font-display text-sm font-bold transition-colors sm:hidden ${callTone}`}
           >
             <PhoneIcon className="size-4" />
             Call
@@ -167,7 +162,7 @@ export default function Header() {
           <a
             href={`mailto:${site.email}`}
             onClick={() => setOpen(false)}
-            className="py-4 font-display text-base font-bold tracking-[-0.02em] break-all text-clay"
+            className="py-4 font-display text-base font-bold tracking-[-0.02em] break-all text-ink"
           >
             {site.email}
           </a>

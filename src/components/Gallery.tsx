@@ -9,7 +9,8 @@ type Photo = {
   focus?: string;
 };
 
-/** Ten photos plus the closing call to action fill the grid exactly. */
+/** Twelve photos, four rows of three, with the call to action as a final
+ *  full-width row. */
 const photos: Photo[] = [
   {
     src: "/images/lawn-2.jpg",
@@ -71,6 +72,18 @@ const photos: Photo[] = [
     caption: "Roadside bed edged to the stone wall",
     focus: "50% 50%",
   },
+  {
+    src: "/images/flowerbed-7.jpg",
+    alt: "Crisp mulch bed with rounded shrubs edged tight against a green lawn at a Connecticut home",
+    caption: "Shrub beds cut in against the lawn",
+    focus: "50% 45%",
+  },
+  {
+    src: "/images/flowerbed-4.jpg",
+    alt: "Fresh mulch and clipped boxwoods with pink petunias along a paver retaining wall",
+    caption: "Petunias and fresh mulch by the wall",
+    focus: "50% 52%",
+  },
 ];
 
 export default function Gallery() {
@@ -78,7 +91,7 @@ export default function Gallery() {
     <section id="gallery" className="bg-stone py-20 sm:py-28">
       <div className="container-x">
         <Reveal className="max-w-3xl">
-          <p className="eyebrow text-clay">Our work</p>
+          <p className="eyebrow text-ink">Our work</p>
           <h2 className="mt-3 text-[clamp(2rem,5.4vw,3.25rem)] text-moss-dark">
             Recent work around Madison and the shoreline.
           </h2>
@@ -103,7 +116,7 @@ export default function Gallery() {
                 style={{ objectPosition: photo.focus ?? "center" }}
               />
               <div
-                className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-moss-deep/85 to-transparent"
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-night/85 to-transparent"
                 aria-hidden="true"
               />
               <p className="pointer-events-none absolute inset-x-0 bottom-0 p-5 font-display text-sm font-bold tracking-[-0.01em] text-stone-light sm:text-base">
@@ -117,7 +130,7 @@ export default function Gallery() {
           <Reveal
             as="li"
             delay={(photos.length % 3) * 110}
-            className="lift group relative flex aspect-[4/3] flex-col justify-center overflow-hidden rounded-2xl bg-moss p-7 sm:col-span-2 sm:aspect-auto sm:min-h-[16rem] sm:p-10"
+            className="lift group relative flex aspect-[4/3] flex-col justify-center overflow-hidden rounded-2xl bg-moss p-7 sm:col-span-2 sm:aspect-auto sm:min-h-[14rem] sm:p-10 lg:col-span-3"
           >
             <div
               className="absolute inset-0 opacity-20"
@@ -134,7 +147,7 @@ export default function Gallery() {
               </p>
               <a
                 href="#contact"
-                className="mt-5 inline-flex items-center gap-2 rounded-full bg-clay px-6 py-3 font-display text-sm font-bold tracking-[-0.01em] text-stone-light transition-colors hover:bg-clay-dark"
+                className="mt-5 inline-flex items-center gap-2 rounded-full bg-sage-light px-6 py-3 font-display text-sm font-bold tracking-[-0.01em] text-night transition-colors hover:bg-sage"
               >
                 Get a free quote
                 <svg

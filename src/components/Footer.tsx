@@ -3,29 +3,17 @@ import { site } from "@/lib/site";
 
 export default function Footer() {
   return (
-    <footer className="bg-moss-deep py-14 text-stone/70">
+    <footer data-surface="dark" className="bg-night py-14 text-stone/70">
       <div className="container-x">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <div className="flex items-center gap-2.5">
-              <span className="grid size-11 place-items-center rounded-xl bg-stone-light">
-                <Image
-                  src="/images/logo.png"
-                  alt=""
-                  width={44}
-                  height={44}
-                  className="size-9 object-contain"
-                />
-              </span>
-              <span className="flex flex-col leading-none">
-                <span className="font-display text-base font-extrabold tracking-[-0.03em] text-stone-light uppercase">
-                  Triple G
-                </span>
-                <span className="font-display text-[0.6rem] font-bold tracking-[0.22em] text-stone/60 uppercase">
-                  Landscaping
-                </span>
-              </span>
-            </div>
+            <Image
+              src="/images/logo-horizontal-light.png"
+              alt=""
+              width={900}
+              height={390}
+              className="h-14 w-auto"
+            />
             <p className="mt-4 text-sm leading-relaxed">
               Owner-operated lawn care and landscaping on the Connecticut shoreline
               since {site.established}.

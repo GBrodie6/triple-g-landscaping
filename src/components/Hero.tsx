@@ -5,7 +5,11 @@ import { PhoneIcon } from "./Icons";
 
 export default function Hero() {
   return (
-    <section id="top" className="relative isolate min-h-[92svh] overflow-hidden bg-moss-deep">
+    <section
+      id="top"
+      data-surface="dark"
+      className="relative isolate min-h-[92svh] overflow-hidden bg-night"
+    >
       <div className="absolute inset-0 -z-10">
         <Image
           src="/images/lawn-1.jpg"
@@ -17,11 +21,11 @@ export default function Hero() {
           className="hero-media-in object-cover object-center"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-moss-deep/85 via-moss-deep/45 to-moss-deep/92"
+          className="absolute inset-0 bg-gradient-to-b from-night/85 via-night/45 to-night/92"
           aria-hidden="true"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-r from-moss-deep/75 via-transparent to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-night/75 via-transparent to-transparent"
           aria-hidden="true"
         />
       </div>
@@ -69,7 +73,7 @@ export default function Hero() {
           >
             <a
               href="#contact"
-              className="lift inline-flex items-center justify-center rounded-full bg-clay px-8 py-4 font-display text-base font-bold tracking-[-0.01em] text-stone-light transition-colors hover:bg-clay-dark"
+              className="lift inline-flex items-center justify-center rounded-full bg-sage-light px-8 py-4 font-display text-base font-bold tracking-[-0.01em] text-night transition-colors hover:bg-sage"
             >
               Get a free quote
             </a>
@@ -84,7 +88,7 @@ export default function Hero() {
 
           {/* Trust badge, kept high on the page. */}
           <div
-            className="hero-in mt-10 inline-flex flex-wrap items-center gap-x-3 gap-y-1.5 rounded-full border border-stone-light/25 bg-moss-deep/45 px-5 py-3 backdrop-blur-sm"
+            className="hero-in mt-10 inline-flex flex-wrap items-center gap-x-3 gap-y-1.5 rounded-full border border-stone-light/25 bg-night/45 px-5 py-3 backdrop-blur-sm"
             style={{ "--hero-delay": "580ms" } as React.CSSProperties}
           >
             <Stars size={17} className="text-sage-light" />

@@ -8,7 +8,6 @@ import { ClockIcon, MailIcon, MessageIcon, PhoneIcon, PinIcon } from "./Icons";
 
 const serviceOptions = [
   "Weekly mowing",
-  "Edging & trimming",
   "Mulching & bed maintenance",
   "Spring or fall cleanup",
   "Tree & shrub care",
@@ -66,7 +65,11 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-moss-dark py-20 text-stone sm:py-28">
+    <section
+      id="contact"
+      data-surface="dark"
+      className="bg-moss-dark py-20 text-stone sm:py-28"
+    >
       <div className="container-x">
         <Reveal className="max-w-2xl">
           <p className="eyebrow text-sage-light">Get a free quote</p>
@@ -84,7 +87,7 @@ export default function Contact() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <a
                 href={`tel:${site.phoneHref}`}
-                className="lift flex flex-1 items-center justify-center gap-3 rounded-2xl bg-clay px-6 py-5 font-display text-lg font-extrabold tracking-[-0.02em] text-stone-light transition-colors hover:bg-clay-dark"
+                className="lift flex flex-1 items-center justify-center gap-3 rounded-2xl bg-sage-light px-6 py-5 font-display text-lg font-extrabold tracking-[-0.02em] text-night transition-colors hover:bg-sage"
               >
                 <PhoneIcon className="size-5" />
                 Call {site.phoneDisplay}

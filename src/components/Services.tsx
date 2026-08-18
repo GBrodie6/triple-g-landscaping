@@ -6,7 +6,6 @@ import {
   CleanupIcon,
   MowerIcon,
   MulchIcon,
-  ShearsIcon,
   ShovelIcon,
   SnowIcon,
   TreeIcon,
@@ -22,7 +21,7 @@ type Service = {
 };
 
 /**
- * Ordered so the five cards backed by real job photos come first and the three
+ * Ordered so the five cards backed by real job photos come first and the two
  * icon panels close the grid, keeping photos and panels contiguous in reading
  * order rather than scattered.
  */
@@ -38,22 +37,12 @@ const services: Service[] = [
     focus: "50% 42%",
   },
   {
-    title: "Edging & Trimming",
-    body: "Crisp bed lines, trimmed borders along walks and fences, and clean separation between lawn and landscape.",
-    Icon: ShearsIcon,
-    image: {
-      src: "/images/flowerbed-7.jpg",
-      alt: "Crisp mulch bed with rounded shrubs edged tight against a green lawn at a Connecticut home",
-    },
-    focus: "50% 45%",
-  },
-  {
     title: "Mulching & Bed Maintenance",
     body: "Fresh mulch, weeded beds, and shaped shrubs, the detail work that makes the whole property look cared for.",
     Icon: MulchIcon,
     image: {
-      src: "/images/flowerbed-4.jpg",
-      alt: "Fresh mulch and clipped boxwoods with pink petunias along a paver retaining wall",
+      src: "/images/mulch-3.jpg",
+      alt: "Fresh mulch and rounded boxwoods sweeping along a paver walkway at a Madison, CT home",
     },
     focus: "50% 52%",
   },
@@ -78,14 +67,19 @@ const services: Service[] = [
     focus: "50% 42%",
   },
   {
-    title: "Tree & Shrub Care",
-    body: "Pruning and trimming that keeps trees and shrubs healthy and shaped right, done at the times of year that actually help growth.",
-    Icon: TreeIcon,
-  },
-  {
     title: "Aeration & Lawn Renovation",
     body: "Aeration, dethatching, and overseeding to fix compacted or thin lawns and get real grass growing back.",
     Icon: AerationIcon,
+    image: {
+      src: "/images/lawn-4.jpg",
+      alt: "Thick striped backyard lawn running up to a Madison, CT home after mowing",
+    },
+    focus: "50% 55%",
+  },
+  {
+    title: "Tree & Shrub Care",
+    body: "Pruning and trimming that keeps trees and shrubs healthy and shaped right, done at the times of year that actually help growth.",
+    Icon: TreeIcon,
   },
   {
     title: "General Landscaping",
@@ -101,24 +95,24 @@ export default function Services() {
   return (
     <section id="services" className="bg-stone py-20 sm:py-28">
       <div className="container-x">
-        <Reveal className="max-w-2xl">
-          <p className="eyebrow text-clay">What we do</p>
-          <h2 className="mt-3 text-[clamp(2rem,5.4vw,3.25rem)] text-moss-dark">
-            Eight services, done properly.
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-moss/80">
-            No packages you don&apos;t need and no upsells. Tell us what the property
-            needs and we&apos;ll quote it straight.
+        <Reveal className="max-w-3xl">
+          <h2 className="eyebrow text-ink">Our Services</h2>
+          <p className="mt-6 text-xl leading-relaxed text-moss/85 sm:text-2xl sm:leading-relaxed">
+            A full range of landscaping services, from weekly lawn care to bigger
+            seasonal work. Take a look below, and reach out if you need something
+            that&apos;s not listed.
           </p>
         </Reveal>
 
-        <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Seven cards do not divide evenly into four columns, so this is a
+            wrapping flex row: four across, then a centred row of three. */}
+        <ul className="mt-12 flex flex-wrap justify-center gap-5">
           {services.map((service, i) => (
             <Reveal
               key={service.title}
               as="li"
               delay={(i % 4) * 90}
-              className="lift group flex flex-col overflow-hidden rounded-2xl bg-stone-light shadow-[0_1px_0_0_rgba(44,59,31,0.1)]"
+              className="lift group flex basis-full flex-col overflow-hidden rounded-2xl bg-stone-light shadow-[0_1px_0_0_rgba(44,59,31,0.1)] sm:basis-[calc(50%-10px)] lg:basis-[calc(25%-15px)]"
             >
               {service.image ? (
                 <div className="zoom-frame relative aspect-[4/3] overflow-hidden">

@@ -38,7 +38,7 @@ export default function Reviews() {
       <div className="container-x">
         <Reveal className="flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
-            <p className="eyebrow text-clay">Reviews</p>
+            <p className="eyebrow text-ink">Reviews</p>
             <h2 className="mt-3 text-[clamp(2rem,5.4vw,3.25rem)] text-moss-dark">
               What customers say.
             </h2>
@@ -49,7 +49,7 @@ export default function Reviews() {
               {site.rating.toFixed(1)}
             </span>
             <span className="flex flex-col gap-1">
-              <Stars size={16} className="text-clay" />
+              <Stars size={16} className="text-ink" />
               <span className="text-sm text-moss/75">stars on Google</span>
             </span>
           </div>
@@ -82,7 +82,7 @@ export default function Reviews() {
               delay={140 + i * 110}
               className="lift flex h-full flex-col rounded-2xl border border-moss/12 bg-stone p-6"
             >
-              <Stars size={15} className="text-clay" />
+              <Stars size={15} className="text-ink" />
               <blockquote className="mt-4 flex-1 leading-relaxed text-moss/85">
                 <p>&ldquo;{item.quote}&rdquo;</p>
               </blockquote>

@@ -7,8 +7,13 @@
   --color-stone: #e7e2d4;
   --color-stone-light: #f2efe6;
   --color-stone-dark: #d7d0bd;
-  --color-clay: #9c5a34;
-  --color-clay-dark: #7f4728;
+  /* Accent. Black rather than a warm neutral, so the site reads as black
+     and green. --color-ink-soft is the hover step, going lighter because
+     --color-ink is already near the floor. */
+  --color-ink: #141412;
+  --color-ink-soft: #2e2e28;
+  /* Deepest surface, used for the hero and footer. */
+  --color-night: #0f0f0e;
   --color-sage: #8fa968;
   --color-sage-light: #adc48a;
 
@@ -22,6 +27,14 @@
   :root {
     color-scheme: light;
     scroll-behavior: smooth;
+    /* Black focus ring on light surfaces. Sections that paint a dark
+       background flip it via data-surface, since black on near-black is
+       invisible. */
+    --focus-ring: var(--color-ink);
+  }
+
+  [data-surface="dark"] {
+    --focus-ring: var(--color-sage-light);
   }
 
   html {
@@ -55,14 +68,14 @@
 
   /* Visible, high-contrast keyboard focus everywhere. */
   :focus-visible {
-    outline: 3px solid var(--color-clay);
+    outline: 3px solid var(--focus-ring);
     outline-offset: 3px;
     border-radius: 2px;
   }
 
   ::selection {
     background-color: var(--color-sage);
-    color: var(--color-moss-deep);
+    color: var(--color-night);
   }
 }
 
@@ -172,13 +185,13 @@
 @media (hover: hover) {
   .lift:hover {
     transform: translateY(-6px);
-    box-shadow: 0 18px 40px -18px rgba(19, 26, 13, 0.45);
+    box-shadow: 0 18px 40px -18px rgba(15, 15, 14, 0.45);
   }
 }
 
 .lift:focus-within {
   transform: translateY(-6px);
-  box-shadow: 0 18px 40px -18px rgba(19, 26, 13, 0.45);
+  box-shadow: 0 18px 40px -18px rgba(15, 15, 14, 0.45);
 }
 
 /* Photo tiles scale their image inside a fixed frame. */
